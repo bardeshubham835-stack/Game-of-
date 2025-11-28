@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raksha Bandhan Celebration</title>
+<style>
+    /* --- Global Styles --- */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; width:100%; font-family: 'Arial', sans-serif; overflow:hidden; }
+    body { background:#1a001a; color:#fff; display:flex; justify-content:center; align-items:center; }
+
+    /* --- Landing Screen --- */
+    #landing {
+        position:absolute; top:0; left:0; width:100%; height:100%;
+        display:flex; flex-direction:column; justify-content:center; align-items:center;
+        background: linear-gradient(270deg, #ff00ff, #00ffff, #ffcc00, #ff00ff);
+        background-size: 800% 800%;
+        animation: gradientBG 15s ease infinite, zoomInOut 6s ease-in-out infinite;
+        text-align:center;
+        z-index:10;
+    }
+
+    #landing h1 {
+        font-size:2.5rem; 
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #00ffff;
+    }
+
+    #revealBtn {
+        margin-top:30px;
+        padding:15px 30px;
+        font-size:1.2rem;
+        color:#fff;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        background:transparent;
+        box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+        text-transform:uppercase;
+        animation: neonPulse 2s ease-in-out infinite;
+    }
+
+    #revealBtn:hover { box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff; }
+
+    @keyframes gradientBG {
+        0%{background-position:0% 50%;}
+        50%{background-position:100% 50%;}
+        100%{background-position:0% 50%;}
+    }
+
+    @keyframes zoomInOut {
+        0%,100%{transform: scale(1);}
+        50%{transform: scale(1.05);}
+    }
+
+    @keyframes neonPulse {
+        0%,100% { box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
+        50% { box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff; }
+    }
+
+    /* --- Celebration Page --- */
+    #celebration {
+        position:absolute; top:0; left:0; width:100%; height:100%;
+        display:flex; flex-direction:column; justify-content:center; align-items:center;
+        background: linear-gradient(135deg, #2c0033, #000033);
+        overflow:hidden;
+        opacity:0; transition: opacity 2s ease;
+    }
+
+    #celebration h1 {
+        font-size:3rem; 
+        text-align:center;
+        margin-bottom:20px;
+        padding:10px 20px;
+        border-radius:12px;
+        background: linear-gradient(90deg, #ff00ff, #00ffff);
+        background-size: 400% 400%;
+        animation: textGlow 6s ease infinite;
+        box-shadow:0 0 20px #ff00ff, 0 0 30px #00ffff;
+    }
+
+    @keyframes textGlow {
+        0%,100%{background-position:0% 50%;}
+        50%{background-position:100% 50%;}
+    }
+
+    #rakhiImage {
+        width:80%;
+        max-width:400px;
+        border-radius:20px;
+        box-shadow: 0 0 20px #ff00ff, 0 0 30px #00ffff, 0 0 40px #ffcc00;
+        animation: pulseZoom 4s ease-in-out infinite;
+        margin-bottom:20px;
+    }
+
+    @keyframes pulseZoom {
+        0%,100%{transform: scale(1);}
+        50%{transform: scale(1.05);}
+    }
+
+    #greetingContainer {
+        text-align:center;
+        padding:15px 20px;
+        border-radius:12px;
+        background:#111;
+        box-shadow:0 0 15px #ff00ff, 0 0 20px #00ffff;
+        margin-bottom:20px;
+    }
+
+    #greetingContainer span.name {
+        color:#ff00ff;
+        animation: neonBlink 2s infinite, zoomName 4s infinite;
+        font-weight:bold;
+    }
+
+    @keyframes neonBlink {
+        0%,100%{text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;}
+        50%{text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;}
+    }
+
+    @keyframes zoomName {
+        0%,100%{transform: scale(1);}
+        50%{transform: scale(1.05);}
+    }
+
+    /* --- Input Fields & Buttons --- */
+    .inputField {
+        padding:12px 15px;
+        margin:10px 0;
+        border-radius:10px;
+        border:2px solid #00ffff;
+        background:#111;
+        color:#fff;
+        font-size:1rem;
+        width:250px;
+        outline:none;
+    }
+
+    .inputField:focus { border-color:#ff00ff; }
+
+    .gift-button {
+        display:inline-block;
+        margin:10px;
+        padding:12px 20px;
+        background:#ff00ff;
+        color:#fff;
+        border-radius:12px;
+        text-decoration:none;
+        font-size:1.1rem;
+        box-shadow:0 0 15px #ff00ff, 0 0 25px #00ffff;
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%,100%{transform: translateY(0);}
+        50%{transform: translateY(-10px);}
+    }
+
+    .whatsapp-button {
+        display:inline-flex;
+        align-items:center;
+        padding:12px 20px;
+        margin:10px;
+        background:#25D366;
+        color:#fff;
+        border-radius:50px;
+        text-decoration:none;
+        font-size:1rem;
+        font-weight:bold;
+        box-shadow:0 0 15px #25D366;
+        transition:0.3s;
+    }
+
+    .whatsapp-button:hover { box-shadow:0 0 30px #25D366; }
+
+    .whatsapp-button img { width:20px; height:20px; margin-right:10px; }
+
+    /* --- Falling flowers and balloons --- */
+    .flower, .balloon {
+        position:absolute;
+        top:-50px;
+        font-size:1.5rem;
+        pointer-events:none;
+        opacity:0.8;
+    }
+
+    .balloon {
+        font-size:2rem;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- --- Landing Screen --- -->
+<div id="landing">
+    <h1>Special Raksha Bandhan message waiting for you</h1>
+    <button id="revealBtn">Click to Reveal</button>
+</div>
+
+<!-- --- Celebration Page --- -->
+<div id="celebration">
+    <h1>Happy Raksha Bandhan</h1>
+    <img id="rakhiImage" src="rakhi.gif" alt="Rakhi">
+    <div id="greetingContainer">
+        <span class="name" id="greetingName">Someone</span> ki taraf se: <span id="greetingMsg">aapko Raksha Bandhan ki bahut bahut badhai</span>
+    </div>
+
+    <!-- Input Fields -->
+    <input type="text" id="userName" class="inputField" placeholder="Enter your name">
+    <textarea id="userMsg" class="inputField" rows="2" placeholder="Type your message"></textarea>
+
+
+    <!-- WhatsApp Share Button -->
+    <a href="#" id="whatsappShare" class="whatsapp-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo"> Share on WhatsApp
+    </a>
+</div>
+
+<!-- Audio -->
+<audio id="rakhiMusic" src="rakhi.mp3" loop></audio>
+
+<script>
+    const landing = document.getElementById('landing');
+    const revealBtn = document.getElementById('revealBtn');
+    const celebration = document.getElementById('celebration');
+    const music = document.getElementById('rakhiMusic');
+
+    const greetingName = document.getElementById('greetingName');
+    const greetingMsg = document.getElementById('greetingMsg');
+
+    const userNameInput = document.getElementById('userName');
+    const userMsgInput = document.getElementById('userMsg');
+
+    const whatsappBtn = document.getElementById('whatsappShare');
+
+    // --- URL Parameters ---
+    const urlParams = new URLSearchParams(window.location.search);
+    let nameParam = urlParams.get('name') || '';
+    let msgParam = urlParams.get('msg') || '';
+
+    if(nameParam) greetingName.textContent = nameParam;
+    if(msgParam) greetingMsg.textContent = msgParam;
+
+    // --- Landing Button Click ---
+    revealBtn.addEventListener('click', ()=>{
+        music.play();
+        landing.style.opacity = '0';
+        setTimeout(()=>{ landing.style.display='none'; celebration.style.opacity='1'; },2000);
+        startCelebration();
+    });
+
+    // --- Celebration Effects ---
+    const flowers = ['🌺','💐','🥀','🌹','🌸','🌼','🌻','🌟','🌈'];
+    const colors = ['#ff00ff','#00ffff','#ffcc00','#ff3399','#33ccff','#00ff99'];
+
+    function createFlower(){
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.textContent = flowers[Math.floor(Math.random()*flowers.length)];
+        flower.style.left = Math.random()*100+'vw';
+        flower.style.fontSize = (Math.random()*20+15)+'px';
+        flower.style.animation = `fall ${5+Math.random()*5}s linear forwards`;
+        document.body.appendChild(flower);
+
+        setTimeout(()=>flower.remove(),10000);
+    }
+
+    function createBalloon(){
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        balloon.textContent = '🎈';
+        balloon.style.left = Math.random()*100+'vw';
+        balloon.style.color = colors[Math.floor(Math.random()*colors.length)];
+        balloon.style.fontSize = (Math.random()*25+20)+'px';
+        balloon.style.animation = `balloonDown ${6+Math.random()*6}s linear forwards`;
+        document.body.appendChild(balloon);
+        setTimeout(()=>balloon.remove(),12000);
+    }
+
+    function startCelebration(){
+        // Flowers and balloons continuously
+        setInterval(createFlower, 800);
+        setInterval(createBalloon, 1200);
+    }
+
+    // --- Input Fields Update Greeting ---
+    userNameInput.addEventListener('input', ()=>{
+        greetingName.textContent = userNameInput.value || 'Someone';
+    });
+    userMsgInput.addEventListener('input', ()=>{
+        greetingMsg.textContent = userMsgInput.value || 'aapko Raksha Bandhan ki bahut bahut badhai';
+    });
+
+    // --- WhatsApp Share ---
+    whatsappBtn.addEventListener('click', ()=>{
+        const name = greetingName.textContent;
+        const msg = greetingMsg.textContent;
+        const shareURL = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(name)}&msg=${encodeURIComponent(msg)}`;
+        const whatsappURL = `https://wa.me/?text=${encodeURIComponent(name+' ki taraf se: '+msg+' '+shareURL)}`;
+        window.open(whatsappURL,'_blank');
+    });
+
+</script>
+
+<!-- --- Animations --- -->
+<style>
+@keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity:1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity:0.2; }
+}
+@keyframes balloonDown {
+    0% { transform: translateY(-60px); opacity:1; }
+    100% { transform: translateY(100vh); opacity:0.2; }
+}
+<script type="text/javascript">
+	atOptions = {
+		'key' : '1f92f4928c2c648b9c29ab160a994896',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+   
+</style>
+
+</body>
+</html>
